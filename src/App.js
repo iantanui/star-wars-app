@@ -18,7 +18,7 @@ function App() {
     < ChakraProvider theme={theme} >
 
       <ColorModeSwitcher justifySelf="flex-end" />
-      
+
       < Navbar />
 
       <Flex align="center" justify="center" width="100%">
