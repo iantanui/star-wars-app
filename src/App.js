@@ -21,14 +21,14 @@ function App() {
 
       < Navbar />
 
-      <Flex align="center" justify="center" width="100%">
-        <Tabs align="center">
+      <Flex bg="teal.500">
+        <Tabs align="center" variant='enclosed' isFitted width="full">
           <TabList>
             <Tab>Films</Tab>
             <Tab>Actors</Tab>
             <Tab>Planets</Tab>
           </TabList>
-          <TabPanels>
+          <TabPanels color="black">
             <TabPanel>
               <p>Films</p>
             </TabPanel>
