@@ -1,9 +1,12 @@
 import React from 'react';
 import {
   ChakraProvider,
-  Box,
-  VStack,
-  Grid,
+  Flex,
+  Tabs,
+  TabList,
+  TabPanels,
+  TabPanel,
+  Tab,
   theme,
 } from '@chakra-ui/react';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
@@ -13,14 +16,33 @@ function App() {
   return (
 
     < ChakraProvider theme={theme} >
-      <Box textAlign="center" fontSize="xl">
-        <Grid minH="100vh" p={3}>
-          <ColorModeSwitcher justifySelf="flex-end" />
-          <VStack spacing={8}>
-            < Navbar />
-          </VStack>
-        </Grid>
-      </Box>
+
+      <ColorModeSwitcher justifySelf="flex-end" />
+      
+      < Navbar />
+
+      <Flex align="center" justify="center" width="100%">
+        <Tabs align="center">
+          <TabList>
+            <Tab>Films</Tab>
+            <Tab>Actors</Tab>
+            <Tab>Planets</Tab>
+          </TabList>
+          <TabPanels>
+            <TabPanel>
+              <p>Films</p>
+            </TabPanel>
+            <TabPanel>
+              <p>Actors</p>
+            </TabPanel>
+            <TabPanel>
+              <p>Planets</p>
+            </TabPanel>
+          </TabPanels>
+
+        </Tabs>
+      </Flex>
+
     </ChakraProvider >
   );
 }
