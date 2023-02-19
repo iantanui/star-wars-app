@@ -4,6 +4,8 @@ import {
     Box,
     Tabs,
     TabList,
+    TabPanels,
+    TabPanel,
     Tab,
     Heading
 } from "@chakra-ui/react";
@@ -16,15 +18,27 @@ function Navbar() {
                     Star Wars App
                 </Heading>
             </Box>
-            <Tabs size='md' variant='enclosed'>
-                <TabList>
-                    <Tab>Films</Tab>
-                    <Tab>Actors</Tab>
-                    <Tab>Planets</Tab>
-                </TabList>
+            <Flex align="center">
+                <Tabs align="center" size='md' variant='enclosed'>
+                    <TabList>
+                        <Tab>Films</Tab>
+                        <Tab>Actors</Tab>
+                        <Tab>Planets</Tab>
+                    </TabList>
+                    <TabPanels>
+                        <TabPanel>
+                            <p>Films</p>
+                        </TabPanel>
+                        <TabPanel>
+                            <p>Actors</p>
+                        </TabPanel>
+                        <TabPanel>
+                            <p>Planets</p>
+                        </TabPanel>
+                    </TabPanels>
 
-            </Tabs>
-
+                </Tabs>
+            </Flex>
         </Flex >
     );
 }
