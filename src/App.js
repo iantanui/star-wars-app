@@ -4,17 +4,20 @@ import {
   ChakraProvider,
   Flex,
   Box,
+  Wrap,
   Heading,
   Tabs,
   TabList,
   TabPanels,
   TabPanel,
+  Image,
   Tab,
   theme,
   Text,
   List,
   ListItem,
-  Link
+  Link,
+  WrapItem
 } from '@chakra-ui/react';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 
@@ -55,10 +58,10 @@ function App() {
 
       <Flex direction="column" minH="1000vh">
         <Box bg="teal.500" p="4">
-          <Heading color="white">Star Wars App</Heading>
+          <Heading color="white" align="center">Star Wars App</Heading>
         </Box>
 
-        <Tabs align="center" variant='enclosed' isFitted width="full">
+        <Tabs isFitted>
 
           <TabList>
             <Tab>Films</Tab>
@@ -69,14 +72,22 @@ function App() {
           <TabPanels color="black">
 
             <TabPanel>
-              <List spacing={3}>
+
+              <Wrap spacing={4}>
                 {films.map((film) => (
-                  <ListItem key={film.title}>
-                    <Link href="#">{film.title}</Link>
-                    <Text>{film.release_date}</Text>
-                  </ListItem>
+                  <WrapItem key={film.episode_id}>
+                    <Box borderWidth="1px" borderRadius="lg" overflow="hidden" p={4}>
+                      <Image src={`https://starwars-visualguide.com/assets/img/films/${film.episode_id}.jpg`} alt={film.title} />
+                      <Box>
+                        <Heading as="h3" size="md" my={2}>
+                          {film.title}
+                        </Heading>
+                      </Box>
+                    </Box>
+                  </WrapItem>
                 ))}
-              </List>
+              </Wrap>
+
             </TabPanel>
             <TabPanel>
               <List spacing={3}>
