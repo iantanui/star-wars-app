@@ -3,6 +3,8 @@ import axios from "axios";
 import {
   ChakraProvider,
   Flex,
+  Box,
+  Heading,
   Tabs,
   TabList,
   TabPanels,
@@ -15,7 +17,6 @@ import {
   Link
 } from '@chakra-ui/react';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
-import Navbar from './Navbar';
 
 function App() {
 
@@ -34,13 +35,13 @@ function App() {
 
     async function fetchPeople() {
       const response = await axios.get("https://swapi.dev/api/people/");
-      setFilms(response.data.results);
+      setPeople(response.data.results);
     }
     fetchPeople();
 
     async function fetchPlanets() {
       const response = await axios.get("https://swapi.dev/api/planets/");
-      setFilms(response.data.results);
+      setPlanets(response.data.results);
     }
     fetchPlanets();
 
@@ -52,14 +53,16 @@ function App() {
 
       <ColorModeSwitcher justifySelf="flex-end" />
 
-      < Navbar />
+      <Flex direction="column" minH="1000vh">
+        <Box bg="teal.500" p="4">
+          <Heading color="white">Star Wars App</Heading>
+        </Box>
 
-      <Flex bg="teal.500">
         <Tabs align="center" variant='enclosed' isFitted width="full">
 
           <TabList>
             <Tab>Films</Tab>
-            <Tab>Actors</Tab>
+            <Tab>People</Tab>
             <Tab>Planets</Tab>
           </TabList>
 
@@ -74,18 +77,33 @@ function App() {
                   </ListItem>
                 ))}
               </List>
-              <p>Films</p>
             </TabPanel>
             <TabPanel>
-              <p>Actors</p>
+              <List spacing={3}>
+                {people.map((actor) => (
+                  <ListItem key={actor.name}>
+                    <Link href="#">{actor.name}</Link>
+                    <Text>{actor.birth_year}</Text>
+                  </ListItem>
+                ))}
+              </List>
             </TabPanel>
+
             <TabPanel>
-              <p>Planets</p>
+              <List spacing={3}>
+                {planets.map((planet) => (
+                  <ListItem key={planet.name}>
+                    <Link href="#">{planet.name}</Link>
+                    <Text>{planet.climate}</Text>
+                  </ListItem>
+                ))}
+              </List>
             </TabPanel>
 
           </TabPanels>
 
         </Tabs>
+
       </Flex>
 
     </ChakraProvider >
