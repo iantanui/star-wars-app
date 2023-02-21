@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
-import { BrowserRouter, Link } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import {
   ChakraProvider,
   Flex,
@@ -18,6 +18,7 @@ import {
   WrapItem,
 } from '@chakra-ui/react';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
+import FilmDetails from './FilmDetails';
 
 function App() {
 
@@ -56,19 +57,20 @@ function App() {
           <Heading color="white" align="center">Star Wars App</Heading>
         </Box>
 
-        <Tabs isFitted>
+        <BrowserRouter>
+          <Tabs isFitted>
 
-          <TabList>
-            <Tab>Films</Tab>
-            <Tab>People</Tab>
-            <Tab>Planets</Tab>
-          </TabList>
+            <TabList>
+              <Tab>Films</Tab>
+              <Tab>People</Tab>
+              <Tab>Planets</Tab>
+            </TabList>
 
-          <TabPanels color="black">
+            <TabPanels color="black">
 
-            <TabPanel>
+              <TabPanel>
 
-              <BrowserRouter>
+
                 <Wrap spacing={4} justify="center" gridTemplateColumns='repeat(auto-fill)'>
                   {films.map((film) => (
                     <WrapItem key={film.episode_id} maxW="390px">
@@ -89,65 +91,72 @@ function App() {
                     </WrapItem>
                   ))}
                 </Wrap>
-              </BrowserRouter>
-            </TabPanel>
 
-            <TabPanel>
+              </TabPanel>
 
-              <Wrap spacing={4} justify="center" gridTemplateColumns='repeat(auto-fill)'>
-                {people.map((actor) => (
-                  <WrapItem key={actor.id} maxW="390px">
-                    <Box borderWidth="1px" borderRadius="lg" overflow="hidden" p={4}>
-                      <Image
-                        src={`https://starwars-visualguide.com/assets/img/characters/${actor.id}.jpg`}
-                        alt={actor.name}
-                      />
-                      <Box>
-                        <Heading as="h3" size="md" my={2}>
-                          {actor.name}
-                        </Heading>
-                        <Text>
-                          <strong>Gender:</strong> {actor.gender}
-                        </Text>
-                        <Text>
-                          <strong>Birth Year:</strong> {actor.birth_year}
-                        </Text>
+              <TabPanel>
+
+                <Wrap spacing={4} justify="center" gridTemplateColumns='repeat(auto-fill)'>
+                  {people.map((actor) => (
+                    <WrapItem key={actor.id} maxW="390px">
+                      <Box borderWidth="1px" borderRadius="lg" overflow="hidden" p={4}>
+                        <Image
+                          src={`https://starwars-visualguide.com/assets/img/characters/${actor.id}.jpg`}
+                          alt={actor.name}
+                        />
+                        <Box>
+                          <Heading as="h3" size="md" my={2}>
+                            {actor.name}
+                          </Heading>
+                          <Text>
+                            <strong>Gender:</strong> {actor.gender}
+                          </Text>
+                          <Text>
+                            <strong>Birth Year:</strong> {actor.birth_year}
+                          </Text>
+                        </Box>
                       </Box>
-                    </Box>
-                  </WrapItem>
-                ))}
-              </Wrap>
+                    </WrapItem>
+                  ))}
+                </Wrap>
 
-            </TabPanel>
+              </TabPanel>
 
-            <TabPanel>
+              <TabPanel>
 
-              <Wrap spacing={4} justify="center" gridTemplateColumns='repeat(auto-fill)'>
-                {planets.map((planet) => (
-                  <WrapItem key={planet.name} maxW="390px">
-                    <Box borderWidth="1px" borderRadius="lg" overflow="hidden" p={4}>
-                      <Image src={`https://starwars-visualguide.com/assets/img/characters/${planet.url.match(/\d+/)}.jpg`} alt={planet.name} />
-                      <Box>
-                        <Heading as="h3" size="md" my={2}>
-                          {planet.name}
-                        </Heading>
-                        <Text>
-                          <strong>Population:</strong> {planet.population}
-                        </Text>
-                        <Text>
-                          <strong>Climate:</strong> {planet.climate}
-                        </Text>
+                <Wrap spacing={4} justify="center" gridTemplateColumns='repeat(auto-fill)'>
+                  {planets.map((planet) => (
+                    <WrapItem key={planet.name} maxW="390px">
+                      <Box borderWidth="1px" borderRadius="lg" overflow="hidden" p={4}>
+                        <Image src={`https://starwars-visualguide.com/assets/img/characters/${planet.url.match(/\d+/)}.jpg`} alt={planet.name} />
+                        <Box>
+                          <Heading as="h3" size="md" my={2}>
+                            {planet.name}
+                          </Heading>
+                          <Text>
+                            <strong>Population:</strong> {planet.population}
+                          </Text>
+                          <Text>
+                            <strong>Climate:</strong> {planet.climate}
+                          </Text>
+                        </Box>
                       </Box>
-                    </Box>
-                  </WrapItem>
-                ))}
-              </Wrap>
+                    </WrapItem>
+                  ))}
+                </Wrap>
 
-            </TabPanel>
+              </TabPanel>
 
-          </TabPanels>
+            </TabPanels>
 
-        </Tabs>
+          </Tabs>
+          
+          <Switch>
+            <Route path='/films/:episodeId'>
+              <FilmDetails films={films} />
+            </Route>
+          </Switch>
+        </BrowserRouter>
 
       </Flex>
 
