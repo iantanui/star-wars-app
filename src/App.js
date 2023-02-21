@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
-import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import {
   ChakraProvider,
   Flex,
@@ -58,6 +58,11 @@ function App() {
         </Box>
 
         <BrowserRouter>
+          <Routes>
+            <Route path='/films/:episodeId'>
+              <FilmDetails films={films} />
+            </Route>
+          </Routes>
           <Tabs isFitted>
 
             <TabList>
@@ -150,12 +155,7 @@ function App() {
             </TabPanels>
 
           </Tabs>
-          
-          <Switch>
-            <Route path='/films/:episodeId'>
-              <FilmDetails films={films} />
-            </Route>
-          </Switch>
+
         </BrowserRouter>
 
       </Flex>
