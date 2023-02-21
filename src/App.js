@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
+import { BrowserRouter, Link } from "react-router-dom";
 import {
   ChakraProvider,
   Flex,
@@ -14,10 +15,7 @@ import {
   Tab,
   theme,
   Text,
-  List,
-  ListItem,
-  Link,
-  WrapItem
+  WrapItem,
 } from '@chakra-ui/react';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 
@@ -30,23 +28,20 @@ function App() {
 
   useEffect(() => {
 
-    async function fetchFilms() {
-      const response = await axios.get("https://swapi.dev/api/films/");
-      setFilms(response.data.results);
-    }
-    fetchFilms();
+    axios
+      .get("https://swapi.dev/api/films/")
+      .then((response) => setFilms(response.data.results))
+      .catch((error) => console.log(error));
 
-    async function fetchPeople() {
-      const response = await axios.get("https://swapi.dev/api/people/");
-      setPeople(response.data.results);
-    }
-    fetchPeople();
+    axios
+      .get("https://swapi.dev/api/people/")
+      .then((response) => setPeople(response.data.results))
+      .catch((error) => console.log(error));
 
-    async function fetchPlanets() {
-      const response = await axios.get("https://swapi.dev/api/planets/");
-      setPlanets(response.data.results);
-    }
-    fetchPlanets();
+    axios
+      .get("https://swapi.dev/api/planets/")
+      .then((response) => setPlanets(response.data.results))
+      .catch((error) => console.log(error));
 
   }, []);
 
@@ -73,15 +68,50 @@ function App() {
 
             <TabPanel>
 
-              <Wrap spacing={4}>
-                {films.map((film) => (
-                  <WrapItem key={film.episode_id}>
+              <BrowserRouter>
+                <Wrap spacing={4} justify="center" gridTemplateColumns='repeat(auto-fill)'>
+                  {films.map((film) => (
+                    <WrapItem key={film.episode_id} maxW="390px">
+                      <Link to={`/films/${film.episode_id}`}>
+                        <Box borderWidth="1px" borderRadius="lg" overflow="hidden" p={4}>
+                          <Image src={`https://starwars-visualguide.com/assets/img/films/${film.episode_id}.jpg`} alt={film.title} />
+                          <Box>
+                            <Heading as="h3" size="md" my={2}>
+                              {film.title}
+                            </Heading>
+                            <Text>
+                              {film.release_date}
+                            </Text>
+                            <Text my={4}>{film.opening_crawl}</Text>
+                          </Box>
+                        </Box>
+                      </Link>
+                    </WrapItem>
+                  ))}
+                </Wrap>
+              </BrowserRouter>
+            </TabPanel>
+
+            <TabPanel>
+
+              <Wrap spacing={4} justify="center" gridTemplateColumns='repeat(auto-fill)'>
+                {people.map((actor) => (
+                  <WrapItem key={actor.id} maxW="390px">
                     <Box borderWidth="1px" borderRadius="lg" overflow="hidden" p={4}>
-                      <Image src={`https://starwars-visualguide.com/assets/img/films/${film.episode_id}.jpg`} alt={film.title} />
+                      <Image
+                        src={`https://starwars-visualguide.com/assets/img/characters/${actor.id}.jpg`}
+                        alt={actor.name}
+                      />
                       <Box>
                         <Heading as="h3" size="md" my={2}>
-                          {film.title}
+                          {actor.name}
                         </Heading>
+                        <Text>
+                          <strong>Gender:</strong> {actor.gender}
+                        </Text>
+                        <Text>
+                          <strong>Birth Year:</strong> {actor.birth_year}
+                        </Text>
                       </Box>
                     </Box>
                   </WrapItem>
@@ -89,26 +119,30 @@ function App() {
               </Wrap>
 
             </TabPanel>
-            <TabPanel>
-              <List spacing={3}>
-                {people.map((actor) => (
-                  <ListItem key={actor.name}>
-                    <Link href="#">{actor.name}</Link>
-                    <Text>{actor.birth_year}</Text>
-                  </ListItem>
-                ))}
-              </List>
-            </TabPanel>
 
             <TabPanel>
-              <List spacing={3}>
+
+              <Wrap spacing={4} justify="center" gridTemplateColumns='repeat(auto-fill)'>
                 {planets.map((planet) => (
-                  <ListItem key={planet.name}>
-                    <Link href="#">{planet.name}</Link>
-                    <Text>{planet.climate}</Text>
-                  </ListItem>
+                  <WrapItem key={planet.name} maxW="390px">
+                    <Box borderWidth="1px" borderRadius="lg" overflow="hidden" p={4}>
+                      <Image src={`https://starwars-visualguide.com/assets/img/characters/${planet.url.match(/\d+/)}.jpg`} alt={planet.name} />
+                      <Box>
+                        <Heading as="h3" size="md" my={2}>
+                          {planet.name}
+                        </Heading>
+                        <Text>
+                          <strong>Population:</strong> {planet.population}
+                        </Text>
+                        <Text>
+                          <strong>Climate:</strong> {planet.climate}
+                        </Text>
+                      </Box>
+                    </Box>
+                  </WrapItem>
                 ))}
-              </List>
+              </Wrap>
+
             </TabPanel>
 
           </TabPanels>
