@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Heading, Box, Text } from '@chakra-ui/react';
+import { Heading, Box, Image, Text } from '@chakra-ui/react';
 
 function FilmDetails() {
     const { id } = useParams();
@@ -22,6 +22,9 @@ function FilmDetails() {
             <Heading as="h1" size="xl" mb={2} align='center'>
                 {film.title}
             </Heading>
+            <Box>
+                <Image src={`https://starwars-visualguide.com/assets/img/films/${id}.jpg`} />
+            </Box>
             <Text fontSize="xl" mb={4}>
                 Directed by {film.director} ({film.release_date})
             </Text>
