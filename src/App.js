@@ -9,6 +9,7 @@ import FilmsPage from './FilmsPage';
 import FilmDetails from './FilmDetails';
 import PeoplePage from './PeoplePage';
 import PlanetsPage from './PlanetsPage';
+import PlanetDetails from './PlanetDetails';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/films/:id" element={<FilmDetails />} />
           <Route path="/people" element={<PeoplePage />} />
           <Route path="/planets" element={<PlanetsPage />} />
+          <Route path="/planet/:id" element={<PlanetDetails />} />
         </Routes>
       </Router>
 
