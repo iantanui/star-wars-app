@@ -14,7 +14,7 @@ function Planets() {
 
     return (
         <Box>
-            <Heading as="h1" mb={4} align="center">
+            <Heading as="h1" mb={4} align="center" padding='3%'>
                 Star Wars Planets
             </Heading>
             {planets.map((planet, index) => (
