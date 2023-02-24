@@ -18,8 +18,8 @@ function FilmDetails() {
     }
 
     return (
-        <Box p={4}>
-            <Heading as="h1" size="xl" mb={2}>
+        <Box p={4} margin='40px' padding='80px'>
+            <Heading as="h1" size="xl" mb={2} align='center'>
                 {film.title}
             </Heading>
             <Text fontSize="xl" mb={4}>

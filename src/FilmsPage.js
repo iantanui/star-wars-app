@@ -20,7 +20,7 @@ function FilmsPage() {
 
                 <Box key={film.episode_id} borderWidth='1px' borderRadius='lg' overflow='hidden'>
                     <Link to={`/films/${film.episode_id}`}>
-                        <Box borderWidth='1px' borderRadius='lg' overflow='hidden' padding='50px'>
+                        <Box borderWidth='1px' borderRadius='lg' overflow='hidden' padding='70px'>
 
                             <Image src={`https://starwars-visualguide.com/assets/img/films/${film.episode_id}.jpg`} alt={film.title} objectFit='cover' />
 
@@ -36,15 +36,15 @@ function FilmsPage() {
                                     {film.title}
                                 </Box>
 
-                                <Box as='p' mb='1' lineHeight='tall' maxH='1.6em' sx={{ 'WebkitLineClamp': 3 }}>
-                                    {film.opening_crawl}
-                                </Box>
+                                <Box as='p' mb='1' lineHeight='tall' maxH='1.8em' sx={{ 'WebkitLineClamp': 3 }} >
+                                {film.opening_crawl}
                             </Box>
                         </Box>
+                </Box>
                     </Link>
                 </Box >
             ))
-            }
+}
         </SimpleGrid >
     );
 }
